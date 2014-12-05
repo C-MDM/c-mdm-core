@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper">
+
+<select id="select" parameterType="long" resultType="SequenceNumber">
+select * from sequence_number where id = #{id}
+</select>
+
+<insert id="insert" parameterType="SequenceNumber">
+INSERT INTO sequence_number
+ (`id`, `seq`, `name`, `initial_value`, `increment_value`, `max_value`, `last_update_ts`) 
+ VALUES 
+ (#{id}, #{seq}, #{name}, #{initialValue}, #{incrementValue}, #{maxValue}, CURRENT_TIMESTAMP);
+</insert>
+
+<insert id="update" parameterType="SequenceNumber">
+	UPDATE sequence_number
+	   SET seq = #{seq}, name = #{name}, initial_value = #{initialValue} , increment_value = #{incrementValue}, max_value = #{maxValue}, last_update_ts = CURRENT_TIMESTAMP
+	 WHERE id = #{id};
+</insert>
+
+<update id="updateNumbering" parameterType="SequenceNumber">
+	UPDATE sequence_number
+	   SET seq = last_insert_id(seq + increment_value), last_update_ts = #{currentTs}
+	 WHERE id = #{id}
+	   AND last_update_ts = #{lastUpdateTs}
+</update>
+
+</mapper>
