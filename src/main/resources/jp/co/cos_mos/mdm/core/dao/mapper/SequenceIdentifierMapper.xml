@@ -3,24 +3,17 @@
 <mapper namespace="jp.co.cos_mos.mdm.core.dao.mapper.SequenceIdentifierMapper">
 
 <select id="select" parameterType="String" resultType="SequenceIdentifier">
-select 
-    class_name as className,
-    sequence_id as sequenceId,
-    inactive_ts as inactiveTs,
-    last_update_ts as lastUpdateTs,
-    last_update_user as lastUpdateUser,
-    last_update_tx_id as lastUpdateTxId 
-  from sequence_identifier 
- where class_name = #{className}
+	SELECT
+	    class_name AS className,
+	    sequence_id AS sequenceId,
+	    inactive_ts AS inactiveTs,
+	    last_update_ts AS lastUpdateTs,
+	    last_update_user AS lastUpdateUser,
+	    last_update_tx_id AS lastUpdateTxId
+	FROM
+	    sequence_identifier
+	WHERE
+	        class_name = #{className}
 </select>
-
-<insert id="insert" parameterType="SequenceIdentifier">
-</insert>
-
-<update id="update" parameterType="SequenceIdentifier">
-</update>
-
-<update id="delete" parameterType="String">
-</update>
 
 </mapper>

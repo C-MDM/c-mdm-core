@@ -1,8 +1,8 @@
 package jp.co.cos_mos.mdm.core.service;
 
 import static org.junit.Assert.*;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceRequest;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceRequest;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberObj;
 
 import org.junit.Test;

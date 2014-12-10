@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Control;
 import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberObj;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Status;

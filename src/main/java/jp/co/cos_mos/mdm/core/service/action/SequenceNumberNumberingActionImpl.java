@@ -6,7 +6,7 @@ import jp.co.cos_mos.mdm.core.dao.entity.SequenceIdentifier;
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceIdentifierMapper;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Control;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Message;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Result;
@@ -22,6 +22,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+/**
+ * シーケンス番号採番アクション実装クラス。
+ * 
+ * @author Cosmos Inc.
+ */
 public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberingAction  {
 
 	@Autowired
@@ -131,8 +136,11 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 	 * 
 	 * @param id sequenceNumberId
 	 * @return 採番済 SequenceNumber オブジェクト
+	 * 
+	 * @see UpperLimitValueException 採番値が上限に達成した場合にスロー
+	 * @see ConflictRequestException 採番値の更新で衝突が発生した場合にスロー
 	 */
-	synchronized private SequenceNumber numbering(Long id) {
+	synchronized protected SequenceNumber numbering(Long id) {
 		
 		SequenceNumber updateSequenceNumber = sequenceNumberMapper.select(id);
 
@@ -155,7 +163,17 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 		return updateSequenceNumber;
 	}
 	
-	private Result validate(SequenceNumberCriteriaObj criteria) {
+	/**
+	 * 入力パラメータの妥当性をチェックします。
+	 * <p>
+	 * 次の妥当性をチェックしエラーの場合、ステータスStatus#BAD_REQUEST_VALUEを返却します
+	 * <ul>
+	 * <li>id の必須チェック
+	 * </ul>
+	 * @param criteria 入力パラメータ
+	 * @return 妥当性チェック結果
+	 */
+	protected Result validate(SequenceNumberCriteriaObj criteria) {
 		Result result = new Result();
 
 		if (StringUtils.isEmpty(criteria.getId())) {

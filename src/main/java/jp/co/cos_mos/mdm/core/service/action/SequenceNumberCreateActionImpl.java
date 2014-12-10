@@ -2,7 +2,7 @@ package jp.co.cos_mos.mdm.core.service.action;
 
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Control;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Result;
 import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberObj;
@@ -13,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * シーケンスナンバー登録アクション実装クラス。
+ * 
+ * @author Cosmos Inc.
+ */
 public class SequenceNumberCreateActionImpl implements
 		SequenceNumberCreateAction {
 
@@ -100,7 +105,24 @@ public class SequenceNumberCreateActionImpl implements
 		return response;
 	}
 	
-	private Result validate(SequenceNumberObj input) {
+
+	/**
+	 * 入力データの妥当性をチェックします。
+	 * <p>
+	 * 次の妥当性をチェックしエラーの場合、ステータスStatus#BAD_REQUEST_VALUEを返却します
+	 * <ul>
+	 * <li>seq の数値チェック
+	 * <li>name の必須チェック
+	 * <li>initialValue の数値チェック
+	 * <li>IncrementValue の数値チェック
+	 * <li>IncrementValue の数値範囲（０より大きい）チェック
+	 * <li>MaxValueの数値チェック
+	 * <li>MaxValueの数値妥当性チェック
+	 * </ul>
+	 * @param input 入力データ
+	 * @return 妥当性チェック結果
+	 */
+	protected Result validate(SequenceNumberObj input) {
 		Result result = new Result();
 		
 		if (!StringUtils.isNumeric(input.getSeq())) {

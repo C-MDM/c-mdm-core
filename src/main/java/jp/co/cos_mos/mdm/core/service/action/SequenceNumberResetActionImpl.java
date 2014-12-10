@@ -2,7 +2,7 @@ package jp.co.cos_mos.mdm.core.service.action;
 
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper;
-import jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Control;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Result;
 import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberCriteriaObj;
@@ -12,11 +12,19 @@ import jp.co.cos_mos.mdm.core.service.domain.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+/**
+ * シーケンス管理レコード初期値設定アクション実装クラス。
+ * 
+ * @author Cosmos Inc.
+ */
 public class SequenceNumberResetActionImpl implements SequenceNumberResetAction {
 
 	@Autowired
 	private SequenceNumberMapper sequenceNumberMapper;
 	
+	/**
+	 * @see jp.co.cos_mos.mdm.core.service.action.SequenceNumberResetAction#perform(Control, SequenceNumberCriteriaObj)
+	 */
 	public SequenceNumberServiceResponse perform(Control control,
 			SequenceNumberCriteriaObj criteria) {
 
@@ -75,7 +83,17 @@ public class SequenceNumberResetActionImpl implements SequenceNumberResetAction 
 		return response;
 	}
 
-	private Result validate(SequenceNumberCriteriaObj criteria) {
+	/**
+	 * 入力パラメータの妥当性をチェックします。
+	 * <p>
+	 * 次の妥当性をチェックしエラーの場合、ステータスStatus#BAD_REQUEST_VALUEを返却します
+	 * <ul>
+	 * <li>id の必須チェック
+	 * </ul>
+	 * @param criteria 入力パラメータ
+	 * @return 妥当性チェック結果
+	 */
+	protected Result validate(SequenceNumberCriteriaObj criteria) {
 		Result result = new Result();
 
 		if (StringUtils.isEmpty(criteria.getId())) {
