@@ -10,8 +10,8 @@
 	<typeAliases>
 		<typeAlias alias="SequenceNumber"
 			type="jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber" />
-		<typeAlias alias="SequenceIdentifier"
-			type="jp.co.cos_mos.mdm.core.dao.entity.SequenceIdentifier" />
+		<typeAlias alias="EntityConfig"
+			type="jp.co.cos_mos.mdm.core.dao.entity.EntityConfig" />
 	</typeAliases>
 
 </configuration>

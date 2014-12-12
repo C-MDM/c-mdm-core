@@ -12,13 +12,13 @@
 	    max_value,
 	    last_update_ts
 	FROM
-	    sequence_number
+	    _sequence_number
 	WHERE
 	        id = #{id}
 </select>
 
 <insert id="insert" parameterType="SequenceNumber">
-	INSERT INTO sequence_number (
+	INSERT INTO _sequence_number (
 	    id,
 	    seq,
 	    name,
@@ -39,7 +39,7 @@
 </insert>
 
 <update id="update" parameterType="SequenceNumber">
-	UPDATE sequence_number SET
+	UPDATE _sequence_number SET
 	    seq = #{seq},
 	    name = #{name},
 	    initial_value = #{initialValue} ,
@@ -52,14 +52,14 @@
 </update>
 
 <delete id="delete" parameterType="SequenceNumber">
-	DELETE FROM sequence_number
+	DELETE FROM _sequence_number
 	WHERE
 	        id = #{id}
 	    AND last_update_ts = #{lastUpdateTs}
 </delete>
 
 <update id="updateNumbering" parameterType="SequenceNumber">
-	UPDATE sequence_number SET
+	UPDATE _sequence_number SET
 	    seq = last_insert_id(seq + increment_value),
 	    last_update_ts = #{currentTs}
 	WHERE

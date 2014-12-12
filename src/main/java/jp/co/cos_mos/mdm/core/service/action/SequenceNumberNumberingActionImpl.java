@@ -2,9 +2,9 @@ package jp.co.cos_mos.mdm.core.service.action;
 
 import java.sql.Timestamp;
 
-import jp.co.cos_mos.mdm.core.dao.entity.SequenceIdentifier;
+import jp.co.cos_mos.mdm.core.dao.entity.EntityConfig;
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
-import jp.co.cos_mos.mdm.core.dao.mapper.SequenceIdentifierMapper;
+import jp.co.cos_mos.mdm.core.dao.mapper.EntityConfigMapper;
 import jp.co.cos_mos.mdm.core.dao.mapper.SequenceNumberMapper;
 import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Control;
@@ -32,7 +32,7 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 	@Autowired
 	private SequenceNumberMapper sequenceNumberMapper;
 	@Autowired
-	private SequenceIdentifierMapper sequenceIdentifierMapper;
+	private EntityConfigMapper entityConfigMapper;
 	
 	/* (非 Javadoc)
 	 * @see jp.co.cos_mos.mdm.core.service.action.SequenceNumberNumberingAction#perform(jp.co.cos_mos.mdm.core.service.domain.entity.Control, jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberCriteriaObj)
@@ -93,10 +93,10 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 	public Long getEntityNumberingId(String classname) {
 		Result result = new Result();
 		
-		SequenceIdentifier seqIdent = 
-				sequenceIdentifierMapper.select(classname);
+		EntityConfig config = 
+				entityConfigMapper.select(classname);
 		
-		if (seqIdent == null) {
+		if (config == null) {
 			Message message = new Message();
 			message.setMessage(classname + " not found fail.");
 
@@ -107,7 +107,7 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 		
 		SequenceNumber updatedSequenceNumber;
 		try {
-			updatedSequenceNumber = numbering(seqIdent.getSequenceId());
+			updatedSequenceNumber = numbering(config.getSequenceId());
 
 		} catch (UpperLimitValueException e) {
 			Message message = new Message();

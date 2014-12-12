@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * SequenceIdentifieデータクラスです。
+ * EntityConfigデータクラスです。
  * <p>
- * SequenceNumberIdに予約されたエンティティのIDを管理します。
- * 各エンティティクラスのID採番時にアクセスされます。
+ * Entity設定情報を保有します。
  * 
  * @author Cosmos Inc.
  */
-public class SequenceIdentifier implements Serializable {
+public class EntityConfig implements Serializable {
 	
 	/** Entity クラス名 **/
 	private String className;

@@ -24,7 +24,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation"
-			value="classpath:/jp/co/cos_mos/mdm/core/dao/mapper/mybatis-config.xml" />
+			value="classpath:mybatis-config.xml" />
 		<property name="typeAliasesPackage" value="jp.co.cos_mos.mdm.core.dao.entity" />
 	</bean>
 
@@ -32,9 +32,5 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	  <property name="basePackage" value="jp.co.cos_mos.mdm.core.dao.mapper" />
 	</bean>
-
-	<!-- ロジック層定義 -->
-	<context:annotation-config />
-	<context:component-scan base-package="jp.co.cos_mos.mdm.*" />
 
 </beans>

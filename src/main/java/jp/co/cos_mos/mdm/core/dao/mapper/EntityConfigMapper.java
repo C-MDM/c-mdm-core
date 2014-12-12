@@ -1,16 +1,16 @@
 package jp.co.cos_mos.mdm.core.dao.mapper;
 
-import jp.co.cos_mos.mdm.core.dao.entity.SequenceIdentifier;
+import jp.co.cos_mos.mdm.core.dao.entity.EntityConfig;
 
 /**
- * SequenceIdentifierデータアクセスマッパー。
+ * EntityConfigデータアクセスマッパー。
  * 
  * @author Cosmos Inc.
  */
-public interface SequenceIdentifierMapper {
+public interface EntityConfigMapper {
 
 	/**
-	 * SequenceIdentifierの主キーを指定しSequenceIdentifierを取得します。
+	 * Entityクラス名を指定しEntityConfigを取得します。
 	 * <pre>
 	 * SELECT
 	 *     class_name AS className,
@@ -20,13 +20,13 @@ public interface SequenceIdentifierMapper {
 	 *     last_update_user AS lastUpdateUser,
 	 *     last_update_tx_id AS lastUpdateTxId
 	 * FROM
-	 *     sequence_identifier
+	 *     _entity_config
 	 * WHERE
 	 *         class_name = #{className}
 	 * </pre>
 	 * @param classname Entity クラス名（完全名）
-	 * @return SequenceIdentifierエンティティオブジェクト
+	 * @return EntityConfigオブジェクト
 	 */
-	public SequenceIdentifier select(String classname);
+	public EntityConfig select(String classname);
 
 }
