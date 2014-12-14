@@ -4,13 +4,13 @@
 
 <select id="select" parameterType="long" resultType="SequenceNumber">
 	SELECT
-	    id,
-	    seq,
-	    name,
-	    initial_value,
-	    increment_value,
-	    max_value,
-	    last_update_ts
+	    id as `id`,
+	    seq as `seq`,
+	    name as `name`,
+	    initial_value as `initialValue`,
+	    increment_value as `incrementValue`,
+	    max_value as `maxValue`,
+	    last_update_ts as `lastUpdateTs`
 	FROM
 	    _sequence_number
 	WHERE
@@ -34,7 +34,7 @@
 	    #{initialValue},
 	    #{incrementValue},
 	    #{maxValue},
-	    CURRENT_TIMESTAMP
+	    CURRENT_TIMESTAMP(6)
 	)
 </insert>
 
@@ -45,7 +45,7 @@
 	    initial_value = #{initialValue} ,
 	    increment_value = #{incrementValue},
 	    max_value = #{maxValue},
-	    last_update_ts = CURRENT_TIMESTAMP
+	    last_update_ts = CURRENT_TIMESTAMP(6)
 	WHERE
 	        id = #{id}
 	    AND last_update_ts = #{lastUpdateTs}
@@ -57,14 +57,5 @@
 	        id = #{id}
 	    AND last_update_ts = #{lastUpdateTs}
 </delete>
-
-<update id="updateNumbering" parameterType="SequenceNumber">
-	UPDATE _sequence_number SET
-	    seq = last_insert_id(seq + increment_value),
-	    last_update_ts = #{currentTs}
-	WHERE
-	        id = #{id}
-	    AND last_update_ts = #{lastUpdateTs}
-</update>
 
 </mapper>

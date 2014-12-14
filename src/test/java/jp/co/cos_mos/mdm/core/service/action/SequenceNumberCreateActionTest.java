@@ -126,4 +126,215 @@ public class SequenceNumberCreateActionTest {
 		assertTrue(response.getOutput().getLastUpdateTs() != null);
 		
 	}
+
+	/**
+	 * maxValue が seq と等しい
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE007() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("1000");
+		input.setInitialValue("0");
+		input.setIncrementValue("1");
+		input.setMaxValue("1000");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * seq が 数値以外
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE001() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("a");
+		input.setInitialValue("0");
+		input.setIncrementValue("1");
+		input.setMaxValue("0");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+
+	/**
+	 * name が なし
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE002() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("");
+		input.setSeq("0");
+		input.setInitialValue("0");
+		input.setIncrementValue("1");
+		input.setMaxValue("0");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+
+	
+	/**
+	 * initialValue が 数値以外
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE003() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("0");
+		input.setInitialValue("a");
+		input.setIncrementValue("1");
+		input.setMaxValue("0");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * incrementValue が 数値以外
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE004() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("0");
+		input.setInitialValue("0");
+		input.setIncrementValue("a");
+		input.setMaxValue("0");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * incrementValue がZERO
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE005() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("0");
+		input.setInitialValue("0");
+		input.setIncrementValue("0");
+		input.setMaxValue("0");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * maxValue が 数値以外
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE006() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("0");
+		input.setInitialValue("0");
+		input.setIncrementValue("1");
+		input.setMaxValue("a");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * maxValue が initialValue と等しい
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE008() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("100");
+		input.setInitialValue("1000");
+		input.setIncrementValue("1");
+		input.setMaxValue("1000");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * maxValue が initialValue + incrementValue と等しい
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE009() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("100");
+		input.setInitialValue("999");
+		input.setIncrementValue("1");
+		input.setMaxValue("1000");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
+	
+	/**
+	 * maxValue が initialValue + incrementValue より小さい
+	 */
+	@Test
+	public void testParform_BAD_REQUEST_VALUE010() {
+		input = new SequenceNumberObj();
+		input.setId(null);
+		input.setName("SequenceNumberName");
+		input.setSeq("100");
+		input.setInitialValue("1000");
+		input.setIncrementValue("1");
+		input.setMaxValue("1000");
+
+		SequenceNumberServiceResponse response = target.perform(control, input);
+
+		assertTrue(this.control.equals(response.getControl()));
+		assertTrue(response.getResult() != null);
+		assertTrue(response.getResult().getStatus() == Status.BAD_REQUEST_VALUE);
+		assertTrue(response.getOutput() == null);
+	}
 }

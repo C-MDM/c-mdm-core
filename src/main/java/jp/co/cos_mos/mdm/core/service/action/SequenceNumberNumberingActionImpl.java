@@ -1,7 +1,5 @@
 package jp.co.cos_mos.mdm.core.service.action;
 
-import java.sql.Timestamp;
-
 import jp.co.cos_mos.mdm.core.dao.entity.EntityConfig;
 import jp.co.cos_mos.mdm.core.dao.entity.SequenceNumber;
 import jp.co.cos_mos.mdm.core.dao.mapper.EntityConfigMapper;
@@ -58,10 +56,12 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 		
 		} catch (UpperLimitValueException e) {
 			result.setStatus(Status.EXCEPTION_UPPER_LIMIT_VALUE);
+			response.setResult(result);
 			return response;
 		} catch (ConflictRequestException e) {
 			result.setStatus(Status.EXCEPTION_CONFLICT);
-			throw new ConflictRequestException(result);
+			response.setResult(result);
+			return response;
 		}
 		
 		// 戻り値を設定
@@ -79,6 +79,8 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 				String.valueOf(updatedSequenceNumber.getIncrementValue()));
 		outputObj.setMaxValue(
 				String.valueOf(updatedSequenceNumber.getMaxValue()));
+		outputObj.setLastUpdateTs(
+				String.valueOf(updatedSequenceNumber.getLastUpdateTs()));
 
 		response.setResult(result);
 		response.setOutput(outputObj);
@@ -115,7 +117,7 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 
 			result.setStatus(Status.EXCEPTION_GET_ENTITY_NUMBERING_ID);
 			result.setMessage(message);
-			throw new UpperLimitValueException(result);
+			throw new GetEntityNumberingIdException(result);
 
 		} catch (ConflictRequestException e) {
 			Message message = new Message();
@@ -144,23 +146,22 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 		
 		SequenceNumber updateSequenceNumber = sequenceNumberMapper.select(id);
 
-		if (updateSequenceNumber.getMaxValue() >= 0) {
+		// 採番
+		updateSequenceNumber.setSeq(
+				updateSequenceNumber.getSeq() + updateSequenceNumber.getIncrementValue());
+
+		if (updateSequenceNumber.getMaxValue() > 0) {
 			if (updateSequenceNumber.getSeq() > updateSequenceNumber.getMaxValue()) {
 				throw new UpperLimitValueException();
 			}
 		}
-		
-		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-		updateSequenceNumber.setCurrentTs(currentTimestamp);
-		
-		int count = sequenceNumberMapper.updateNumbering(updateSequenceNumber);
+
+		int count = sequenceNumberMapper.update(updateSequenceNumber);
 		if (count == 0) {
 			throw new ConflictRequestException();
 		}
-		
-		updateSequenceNumber.setLastUpdateTs(currentTimestamp);
 
-		return updateSequenceNumber;
+		return sequenceNumberMapper.select(id);
 	}
 	
 	/**

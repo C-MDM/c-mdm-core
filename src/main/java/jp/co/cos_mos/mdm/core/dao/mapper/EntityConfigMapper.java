@@ -29,4 +29,26 @@ public interface EntityConfigMapper {
 	 */
 	public EntityConfig select(String classname);
 
+	/**
+	 * 引数に指定されたEntityConfigを追加します。
+	 * 
+	 * @param config EntityConfigエンティティオブジェクト
+	 * @return 登録件数
+	 */
+	public int insert(EntityConfig config);
+
+	/**
+	 * 引数に指定されたEntityConfigを削除します。
+	 * <p>
+	 * 削除キーとして以下を指定してください。
+	 * <ul>
+	 * <li>name Entityクラス名
+	 * <li>lastUpdateTs 最終更新日時
+	 * </ul>
+	 * 
+	 * @param config EntityConfigエンティティオブジェクト
+	 * @return 削除件数
+	 */
+	public int delete(EntityConfig config);
+
 }

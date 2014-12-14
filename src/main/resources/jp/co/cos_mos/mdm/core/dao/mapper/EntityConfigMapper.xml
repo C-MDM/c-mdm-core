@@ -16,4 +16,30 @@
 	        class_name = #{className}
 </select>
 
+<insert id="insert" parameterType="EntityConfig">
+	INSERT INTO _entity_config (
+	    `class_name`,
+	    `sequence_id`,
+	    `inactive_ts`,
+	    `last_update_ts`,
+	    `last_update_user`,
+	    `last_update_tx_id`
+	)
+	VALUES (
+	    #{className},
+	    #{sequenceId},
+	    #{inactiveTs},
+	    CURRENT_TIMESTAMP(6),
+	    #{lastUpdateUser},
+	    #{lastUpdateTxId}
+	)
+</insert>
+
+<delete id="delete" parameterType="EntityConfig">
+	DELETE FROM _entity_config
+	WHERE
+	        class_name = #{className}
+	    AND last_update_ts = #{lastUpdateTs}
+</delete>
+
 </mapper>

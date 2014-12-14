@@ -10,6 +10,8 @@ import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberObj;
 import jp.co.cos_mos.mdm.core.service.domain.entity.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -25,6 +27,7 @@ public class SequenceNumberResetActionImpl implements SequenceNumberResetAction 
 	/**
 	 * @see jp.co.cos_mos.mdm.core.service.action.SequenceNumberResetAction#perform(Control, SequenceNumberCriteriaObj)
 	 */
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public SequenceNumberServiceResponse perform(Control control,
 			SequenceNumberCriteriaObj criteria) {
 
@@ -47,8 +50,8 @@ public class SequenceNumberResetActionImpl implements SequenceNumberResetAction 
 		reset.setLastUpdateTs(reset.getLastUpdateTs());
 
 		int count = sequenceNumberMapper.update(reset);
-		if (count != 0) {
-			result.setStatus(Status.FATAL);
+		if (count == 0) {
+			result.setStatus(Status.EXCEPTION_CONFLICT);
 			response.setResult(result);
 			return response;
 		}
@@ -57,11 +60,6 @@ public class SequenceNumberResetActionImpl implements SequenceNumberResetAction 
 		SequenceNumberObj outputObj = new SequenceNumberObj();
 		SequenceNumber resetSeqIdObj =
 				sequenceNumberMapper.select(sequenceNumberId);
-		if (resetSeqIdObj == null) {
-			result.setStatus(Status.FATAL);
-			response.setResult(result);
-			return response;
-		}
 		
 		outputObj.setId(
 				String.valueOf(resetSeqIdObj.getId()));
@@ -76,6 +74,8 @@ public class SequenceNumberResetActionImpl implements SequenceNumberResetAction 
 				String.valueOf(resetSeqIdObj.getIncrementValue()));
 		outputObj.setMaxValue(
 				String.valueOf(resetSeqIdObj.getMaxValue()));
+		outputObj.setLastUpdateTs(
+				String.valueOf(resetSeqIdObj.getLastUpdateTs()));
 
 		response.setResult(result);
 		response.setOutput(outputObj);

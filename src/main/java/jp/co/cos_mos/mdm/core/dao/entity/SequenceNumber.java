@@ -33,9 +33,6 @@ public class SequenceNumber implements Serializable {
 	
 	/** 最終更新日時 **/
 	private Timestamp lastUpdateTs;
-	
-	/** 現在日時 **/
-	private Timestamp currentTs;
 
 	/**
 	 * @return id
@@ -133,20 +130,6 @@ public class SequenceNumber implements Serializable {
 	 */
 	public void setLastUpdateTs(Timestamp lastUpdateTs) {
 		this.lastUpdateTs = lastUpdateTs;
-	}
-
-	/**
-	 * @return currentTs
-	 */
-	public Timestamp getCurrentTs() {
-		return currentTs;
-	}
-
-	/**
-	 * @param currentTs セットする currentTs
-	 */
-	public void setCurrentTs(Timestamp currentTs) {
-		this.currentTs = currentTs;
 	}
 	
 }

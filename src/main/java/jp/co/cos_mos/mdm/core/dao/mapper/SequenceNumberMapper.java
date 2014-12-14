@@ -52,20 +52,6 @@ public interface SequenceNumberMapper {
 	 * @return 削除件数
 	 */
 	public int delete(SequenceNumber sequence);
-	
-	/**
-	 * 引数に指定されたSequenceNumberの採番値を更新します。
-	 * <p>
-	 * 更新キー・更新値として以下を指定してください。
-	 * <ul>
-	 * <li>id SequenceNumberId
-	 * <li>lastUpdateTs 最終更新日時
-	 * <li>currentTs 現在日時
-	 * </ul>
-	 * 
-	 * @param sequence SequenceNumberエンティティオブジェクト
-	 * @return 更新件数
-	 */
-	public int updateNumbering(SequenceNumber sequence);
+
 	
 }
