@@ -32,5 +32,10 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	  <property name="basePackage" value="jp.co.cos_mos.mdm.core.dao.mapper" />
 	</bean>
+	
+	<!-- ロジック層定義 -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="jp.co.cos_mos.mdm.*" />
 
 </beans>

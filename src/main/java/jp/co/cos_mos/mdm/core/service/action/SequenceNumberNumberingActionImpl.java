@@ -16,6 +16,7 @@ import jp.co.cos_mos.mdm.core.service.exception.GetEntityNumberingIdException;
 import jp.co.cos_mos.mdm.core.service.exception.UpperLimitValueException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -25,6 +26,7 @@ import org.springframework.util.StringUtils;
  * 
  * @author Cosmos Inc.
  */
+@Service
 public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberingAction  {
 
 	@Autowired
@@ -145,6 +147,10 @@ public class SequenceNumberNumberingActionImpl implements SequenceNumberNumberin
 	synchronized protected SequenceNumber numbering(Long id) {
 		
 		SequenceNumber updateSequenceNumber = sequenceNumberMapper.select(id);
+		if (updateSequenceNumber == null) {
+			// TODO:selectの結果なければnull
+			System.err.println();
+		}
 
 		// 採番
 		updateSequenceNumber.setSeq(

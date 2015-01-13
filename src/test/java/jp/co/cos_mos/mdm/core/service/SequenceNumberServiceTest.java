@@ -3,6 +3,7 @@ package jp.co.cos_mos.mdm.core.service;
 import static org.junit.Assert.*;
 import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceRequest;
 import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
+import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberCriteriaObj;
 import jp.co.cos_mos.mdm.core.service.domain.entity.SequenceNumberObj;
 
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class SequenceNumberServiceTest {
 		inputObj.setSeq("0");
 		inputObj.setName("test");
 		inputObj.setInitialValue("0");
-		inputObj.setIncrementValue("0");
+		inputObj.setIncrementValue("1");
 		inputObj.setMaxValue("100");
 		
 		SequenceNumberServiceRequest request = 
@@ -44,11 +45,11 @@ public class SequenceNumberServiceTest {
 
 	@Test
 	public void testNumbering001() {
-		SequenceNumberObj inputObj = new SequenceNumberObj();
-		inputObj.setId("0");
+		SequenceNumberCriteriaObj criteriaObj = new SequenceNumberCriteriaObj();
+		criteriaObj.setId("0");
 		SequenceNumberServiceRequest request = 
 				new SequenceNumberServiceRequest();
-		request.setInput(inputObj);
+		request.setCriteria(criteriaObj);
 		
 		SequenceNumberServiceResponse response = 
 				service.numbering(request);
@@ -58,11 +59,11 @@ public class SequenceNumberServiceTest {
 	
 	@Test
 	public void testNumbering002() {
-		SequenceNumberObj inputObj = new SequenceNumberObj();
-		inputObj.setId("0");
+		SequenceNumberCriteriaObj criteriaObj = new SequenceNumberCriteriaObj();
+		criteriaObj.setId("0");
 		SequenceNumberServiceRequest request = 
 				new SequenceNumberServiceRequest();
-		request.setInput(inputObj);
+		request.setCriteria(criteriaObj);
 		
 		SequenceNumberServiceResponse response1 = 
 				service.numbering(request);

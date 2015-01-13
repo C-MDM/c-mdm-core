@@ -10,6 +10,7 @@ import jp.co.cos_mos.mdm.core.service.domain.entity.Status;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  * @author Cosmos Inc.
  */
+@Service
 public class SequenceNumberCreateActionImpl implements
 		SequenceNumberCreateAction {
 

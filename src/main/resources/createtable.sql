@@ -64,3 +64,4 @@ INSERT INTO _entity_config (`class_name`, `sequence_id`, `last_update_ts`, `last
 INSERT INTO _entity_config (`class_name`, `sequence_id`, `last_update_ts`, `last_update_user`, `last_update_tx_id`) VALUES ('jp.co.cos_mos.mdm.v1.dao.entity.CodeCategory', '2', CURRENT_TIMESTAMP, 'c-mdm', '0');
 INSERT INTO _entity_config (`class_name`, `sequence_id`, `last_update_ts`, `last_update_user`, `last_update_tx_id`) VALUES ('jp.co.cos_mos.mdm.v1.dao.entity.Code', '3', CURRENT_TIMESTAMP, 'c-mdm', '0');
 
+INSERT INTO `_sequence_number`(`id`, `seq`, `name`, `initial_value`, `increment_value`, `max_value`, `last_update_ts`) VALUES (0,0,"",0,0,0,"2015-01-01 00:00:00")
