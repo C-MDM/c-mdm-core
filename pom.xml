@@ -16,7 +16,6 @@
 		  <artifactId>maven-javadoc-plugin</artifactId>
 		  <configuration>
 		    <author>true</author>
-		    <source>1.7</source>
 		    <show>protected</show>
 		    <encoding>UTF-8</encoding>
 		    <charset>UTF-8</charset>
