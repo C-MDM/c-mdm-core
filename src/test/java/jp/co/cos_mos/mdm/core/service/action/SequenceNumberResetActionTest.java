@@ -57,7 +57,7 @@ public class SequenceNumberResetActionTest {
 		resetedSequenceNumber.setLastUpdateTs(new Timestamp(System.currentTimeMillis()));
 
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(resetedSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(1);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(1);
 
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		resetedSequenceNumber.setSeq(
@@ -124,7 +124,7 @@ public class SequenceNumberResetActionTest {
 		resetedSequenceNumber.setLastUpdateTs(new Timestamp(System.currentTimeMillis()));
 
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(resetedSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(0);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(0);
 
 		SequenceNumberServiceResponse response = target.perform(control, criteria);
 

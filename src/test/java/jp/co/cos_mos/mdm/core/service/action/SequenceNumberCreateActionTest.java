@@ -53,7 +53,7 @@ public class SequenceNumberCreateActionTest {
 		when(numberingAction.getEntityNumberingId(
 				SequenceNumber.class.getName())).thenReturn(sequenceNumberId);
 		
-		when(sequenceNumberMapper.insert(anyObject())).thenReturn(1);
+		when(sequenceNumberMapper.insert(any(SequenceNumber.class))).thenReturn(1);
 		
 		SequenceNumber insertedSequenceNumber = new SequenceNumber();
 		insertedSequenceNumber.setId(sequenceNumberId);
@@ -97,7 +97,7 @@ public class SequenceNumberCreateActionTest {
 		when(numberingAction.getEntityNumberingId(
 				SequenceNumber.class.getName())).thenReturn(sequenceNumberId);
 		
-		when(sequenceNumberMapper.insert(anyObject())).thenReturn(1);
+		when(sequenceNumberMapper.insert(any(SequenceNumber.class))).thenReturn(1);
 		
 		SequenceNumber insertedSequenceNumber = new SequenceNumber();
 		insertedSequenceNumber.setId(sequenceNumberId);

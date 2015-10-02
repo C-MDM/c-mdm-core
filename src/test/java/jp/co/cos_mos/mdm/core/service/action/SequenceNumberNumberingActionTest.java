@@ -65,7 +65,7 @@ public class SequenceNumberNumberingActionTest {
 		numberingSequenceNumber.setLastUpdateTs(beforeTs);
 		
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(numberingSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(1);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(1);
 		
 		Timestamp afterTs = new Timestamp(System.currentTimeMillis());
 
@@ -158,7 +158,7 @@ public class SequenceNumberNumberingActionTest {
 		numberingSequenceNumber.setLastUpdateTs(beforeTs);
 		
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(numberingSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(0);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(0);
 
 		SequenceNumberServiceResponse response = target.perform(control, criteria);
 
@@ -203,7 +203,7 @@ public class SequenceNumberNumberingActionTest {
 		numberingSequenceNumber.setIncrementValue(1);
 		
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(numberingSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(1);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(1);
 		
 		SequenceNumber updatedSequenceNumber = new SequenceNumber();
 		updatedSequenceNumber.setId(sequenceNumberId);
@@ -307,7 +307,7 @@ public class SequenceNumberNumberingActionTest {
 		numberingSequenceNumber.setIncrementValue(1);
 		
 		when(sequenceNumberMapper.select(sequenceNumberId)).thenReturn(numberingSequenceNumber);
-		when(sequenceNumberMapper.update(anyObject())).thenReturn(0);
+		when(sequenceNumberMapper.update(any(SequenceNumber.class))).thenReturn(0);
 		
 		Long getid = null;
 		try {
