@@ -71,7 +71,7 @@
                 			<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                 			<branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
                 			<includes><include>**/*</include></includes>
-					<repositoryName>c-mdm-core</repositoryName>      <!-- github repo name -->
+					<repositoryName>C-MDM/c-mdm-core</repositoryName>      <!-- github repo name -->
 			                <repositoryOwner>yoshi023</repositoryOwner>    <!-- github username  -->
 			                <merge>true</merge>
             			</configuration>
