@@ -9,14 +9,14 @@
 		<name>Cosmos Inc.</name>
 		<url>http://www.cos-mos.co.jp</url>
 	</organization>
+	<distributionManagement>
+    		<repository>
+        		<id>internal.repo</id>
+        		<name>Temporary Staging Repository</name>
+        		<url>file://${project.build.directory}/mvn-repo</url>
+    		</repository>
+	</distributionManagement>
 	<build>
-		<distributionManagement>
-	    		<repository>
-	        		<id>internal.repo</id>
-	        		<name>Temporary Staging Repository</name>
-	        		<url>file://${project.build.directory}/mvn-repo</url>
-	    		</repository>
-		</distributionManagement>
 		<plugins>
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
