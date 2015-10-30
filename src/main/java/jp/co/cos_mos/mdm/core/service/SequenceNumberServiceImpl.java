@@ -1,6 +1,7 @@
 package jp.co.cos_mos.mdm.core.service;
 
 import jp.co.cos_mos.mdm.core.service.action.SequenceNumberCreateAction;
+import jp.co.cos_mos.mdm.core.service.action.SequenceNumberGetAction;
 import jp.co.cos_mos.mdm.core.service.action.SequenceNumberNumberingAction;
 import jp.co.cos_mos.mdm.core.service.action.SequenceNumberResetAction;
 import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceRequest;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class SequenceNumberServiceImpl implements SequenceNumberService {
 	
 	@Autowired
+	private SequenceNumberGetAction getAction;
+	@Autowired
 	private SequenceNumberCreateAction createAction;
 	@Autowired
 	private SequenceNumberNumberingAction numberingAction;
@@ -25,6 +28,15 @@ public class SequenceNumberServiceImpl implements SequenceNumberService {
 	private SequenceNumberResetAction resetAction;
 	
 	
+	/*
+	 * (非 Javadoc)
+	 * @see jp.co.cos_mos.mdm.core.service.SequenceNumberService#get(jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceRequest)
+	 */
+	public SequenceNumberServiceResponse get(
+			SequenceNumberServiceRequest request) {
+		return getAction.perform(request.getControl(), request.getCriteria());
+	}
+
 	/* (非 Javadoc)
 	 * @see jp.co.cos_mos.mdm.core.service.SequenceNumberService#create(jp.co.cos_mos.mdm.core.domain.SequenceNumberServiceRequest)
 	 */

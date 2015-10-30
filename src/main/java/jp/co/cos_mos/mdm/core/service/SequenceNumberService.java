@@ -11,6 +11,15 @@ import jp.co.cos_mos.mdm.core.service.domain.SequenceNumberServiceResponse;
 public interface SequenceNumberService {
 
 	/**
+	 * 指定されたシーケンスナンバー管理レコードを取得します。
+	 * 
+	 * @param request 要求オブジェクト
+	 * @return 応答オブジェクト
+	 */
+	public SequenceNumberServiceResponse get(
+			SequenceNumberServiceRequest request);
+	
+	/**
 	 * シーケンスナンバー管理レコードを登録します。
 	 * 
 	 * @param request 要求オブジェクト
